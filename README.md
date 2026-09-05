@@ -4,7 +4,7 @@ A small collection of browser-based games built with [NiceGUI](https://nicegui.i
 
 **[Play it live here](https://game-hub-56g8.onrender.com)**
 
-> Note: the free hosting tier sleeps after periods of inactivity - the first load after a while may take ~30 seconds to wake up.
+> Note: the free hosting tier sleeps after periods of inactivity - the first load after a while may take a minute to wake up.
 
 ## About this project:
 
