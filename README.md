@@ -8,7 +8,7 @@ A small collection of browser-based games built with [NiceGUI](https://nicegui.i
 
 ## About this project:
 
-This started as a way to learn Python and NiceGUI from scratch by building small, complete games one at a time, then combining them into a single hub with shared navigation and styling. It's a learning project, not a production app, but everything here works end to end .
+This started as a way to learn Python and NiceGUI from scratch by building small, complete games one at a time, then combining them into a single hub with shared navigation and styling. It's a learning project, not a production app, but everything here works end to end.
 
 ## Games
 
