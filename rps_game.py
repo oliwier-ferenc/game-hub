@@ -5,36 +5,35 @@ from theme import ACCENT_COLOR, ACCENT_LIGHT, ACCENT_ICON
 # --- global variables ---
 choices = ["r", "p", "s"]
 labels = {"r": "Rock", "p": "Paper", "s": "Scissors"}
-score = {"wins": 0, "losses": 0, "ties": 0}
-
-# --- game logic ---
-def play(user_choice: str):
-    computer_choice = random.choice(choices)
-    choice_label.text = f"You chose {labels[user_choice]} — Computer chose {labels[computer_choice]}"
-
-    if user_choice == computer_choice:
-        result_label.text = "It's a tie!"
-        result_label.classes(replace="text-2xl font-bold text-yellow-500")
-        score["ties"] += 1
-    elif (
-        (user_choice == "r" and computer_choice == "s")
-        or (user_choice == "p" and computer_choice == "r")
-        or (user_choice == "s" and computer_choice == "p")
-    ):
-        result_label.text = "You win!"
-        result_label.classes(replace="text-2xl font-bold text-green-500")
-        score["wins"] += 1
-    else:
-        result_label.text = "Computer wins!"
-        result_label.classes(replace="text-2xl font-bold text-red-500")
-        score["losses"] += 1
-
-    score_label.text = f"Wins: {score['wins']}  |  Losses: {score['losses']}  |  Ties: {score['ties']}"
 
 # --- page layout ---
 @ui.page("/rock-paper-scissors")
 def rps_page():
-    global choice_label, result_label, score_label
+    score = {"wins": 0, "losses": 0, "ties": 0} 
+
+    # --- game logic ---
+    def play(user_choice: str):
+        computer_choice = random.choice(choices)
+        choice_label.text = f"You chose {labels[user_choice]} — Computer chose {labels[computer_choice]}"
+
+        if user_choice == computer_choice:
+            result_label.text = "It's a tie!"
+            result_label.classes(replace="text-2xl font-bold text-yellow-500")
+            score["ties"] += 1
+        elif (
+            (user_choice == "r" and computer_choice == "s")
+            or (user_choice == "p" and computer_choice == "r")
+            or (user_choice == "s" and computer_choice == "p")
+        ):
+            result_label.text = "You win!"
+            result_label.classes(replace="text-2xl font-bold text-green-500")
+            score["wins"] += 1
+        else:
+            result_label.text = "Computer wins!"
+            result_label.classes(replace="text-2xl font-bold text-red-500")
+            score["losses"] += 1
+
+        score_label.text = f"Wins: {score['wins']}  |  Losses: {score['losses']}  |  Ties: {score['ties']}"
 
     ui.query(".nicegui-content").classes("p-0")
 
