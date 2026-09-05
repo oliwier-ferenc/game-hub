@@ -1,6 +1,7 @@
 from nicegui import ui
-from rps_game import rps_page
-from tic_tac_toe import tic_tac_toe_page
+import os
+from games.rps_game import rps_page
+from games.tic_tac_toe import tic_tac_toe_page
 from theme import ACCENT_COLOR, ACCENT_LIGHT, ACCENT_ICON
 
 # browser icons: https://fonts.google.com/icons?icon.size=24&icon.color=%23e3e3e3
@@ -42,4 +43,4 @@ def home_page():
 
 # --- run the app ---
 if __name__ in {"__main__", "__mp_main__"}:
-    ui.run(title="Game Hub")
+    ui.run(title="Game Hub", host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
