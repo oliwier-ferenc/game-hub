@@ -1,6 +1,6 @@
 # Game Hub 
 
-A small collection of browser-based games built with [NiceGUI](https://nicegui.io/), a python framework for building web UIs without writing HTML/CCS/JS.
+A small collection of browser-based games built with [NiceGUI](https://nicegui.io/), a python framework for building web UIs without writing HTML/CSS/JS.
 
 **[Play it live here](https://game-hub-56g8.onrender.com)**
 
@@ -12,10 +12,10 @@ This started as a way to learn Python and NiceGUI from scratch by building small
 
 ## Games
 
-- **Rock Paper Scissors** - the classic game against a random computer opponent, with running win/loss/tie tracking.
-- **Tic-Tac-Toe** - play against a computer opponent that tries to win or block you, with running scoreboard and reset button.
+- **Rock Paper Scissors:** The classic game against a random computer opponent, with win/loss/tie tracking.
+- **Tic-Tac-Toe:** Play against a computer opponent that tries to win or block you, with a scoreboard and reset button.
 
-More games are in progress.
+**More games are in progress.**
 
 ## Tech stack
 
