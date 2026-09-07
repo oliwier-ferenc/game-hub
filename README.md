@@ -14,8 +14,9 @@ This started as a way to learn Python and NiceGUI from scratch by building small
 
 - **Rock Paper Scissors:** The classic game against a random computer opponent, with win/loss/tie tracking.
 - **Tic-Tac-Toe:** Play against a computer opponent that tries to win or block you, with a scoreboard and reset button.
+- **Slots:** Play an animated fruit slot machine with variable symbol payouts and bankruptcy protection.
 
-**More games are in progress.**
+**More features are in progress.**
 
 ## Tech stack
 
