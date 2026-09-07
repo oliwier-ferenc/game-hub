@@ -1,7 +1,8 @@
-from nicegui import ui
 import os
+from nicegui import ui
 from games.rps_game import rps_page
 from games.tic_tac_toe import tic_tac_toe_page
+from games.slots import slots_page
 from theme import ACCENT_COLOR, ACCENT_LIGHT, ACCENT_ICON
 
 # browser icons: https://fonts.google.com/icons?icon.size=24&icon.color=%23e3e3e3
@@ -34,11 +35,11 @@ def home_page():
                         ui.icon("grid_on").classes(f"text-4xl text-{ACCENT_ICON}")  
                         ui.label("Tic Tac Toe") 
 
-        ## Placeholder card
-            #with ui.card().classes("cursor-pointer p-4 hover:shadow-lg").on("click", lambda: ui.navigate.to("/placeholder")):
-             #       with ui.column().classes("items-center gap-2"):
-              #          ui.icon("casino").classes(f"text-4xl text-{ACCENT_ICON}")  
-               #         ui.label("Placeholder Game")
+        ## Slots card
+            with ui.card().classes("cursor-pointer p-4 hover:shadow-lg").on("click", lambda: ui.navigate.to("/slots")):
+                with ui.column().classes("items-center gap-2"):
+                    ui.icon("casino").classes(f"text-4xl text-{ACCENT_ICON}")  
+                    ui.label("Slots")
 
 
 # --- run the app ---
