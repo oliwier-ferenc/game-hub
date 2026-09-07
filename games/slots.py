@@ -154,6 +154,7 @@ def slots_page():
                 result_label.classes(replace="text-2xl font-bold text-yellow-500")
         else:
             result_label.text = "No win this time. Try again!"
+            result_label.classes(replace="text-2xl font-bold text-red-300")
 
         # Automatic bankrupt reset
         if balance <= 0:
