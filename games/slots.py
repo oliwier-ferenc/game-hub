@@ -178,8 +178,25 @@ def slots_page():
     ui.query(".nicegui-content").classes("p-0")
 
     with ui.column().classes(
-        f"items-center justify-center gap-4 p-4 w-full h-screen bg-{ACCENT_LIGHT}"
+        f"items-center justify-center gap-4 p-4 w-full h-screen bg-{ACCENT_LIGHT} relative"
     ):
+
+        # Payout table sidepanel
+        with ui.card().classes(f"fixed top-6 left-6 bg-{ACCENT_LIGHT} shadow-lg border roundex-xl w-60 z-10 gap-l"):
+            ui.label("Payout Table").classes("text-2xl font-bold text-gray-800 border-b pb-l w-full")
+
+            for symbol, value in SYMBOL_VALUE.items():
+                with ui.row().classes("justify-between w-full text-xs text-gray-700 py-0.5"):
+                    ui.label(f"3x {symbol}")
+                    ui.label(f"{value}x").classes("font-bold text-green-600")
+
+            ui.separator().classes("my-l")
+
+            with ui.row().classes("justify-between w-full text-xs text-gray-700 py-0.5"):
+                ui.label("2x any symbol")
+                ui.label("1x").classes("font-bold text-yellow-600")
+
+        # Centered game UI
         ui.label("Slot Machine").classes(f"text-4xl font-bold mb-2 text-{ACCENT_COLOR}")
 
         balance_label = ui.label(f"Balance: ${balance}").classes("text-lg font-bold")
