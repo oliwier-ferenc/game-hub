@@ -63,27 +63,29 @@ def slots_page():
 
         # Check if the value is None or empty
         if value is None or value == "":
-            return False
+            return None 
 
         try:
             bet = int(value)
         except(ValueError, TypeError):
             result_label.text = "Please enter a valid number."
-            return False
+            result_label.classes(replace="text-2xl font-bold text-red")
+            return None
 
         # Check if the bet is less than or equal to zero
         if bet <= 0:
-            return False 
+            return None 
 
         # Check if the bet is greater than the balance
         if bet > balance:
             result_label.text = "Insufficient balance!"
-            return False
+            result_label.classes(replace="text-2xl font-bold text-red")
+            return None
 
-        return True
+        return bet
 
     def update_spin_button_state():
-        if validate_bet():
+        if validate_bet() is not None:
             spin_button.enable()
         else:
             spin_button.disable()
@@ -91,23 +93,13 @@ def slots_page():
     async def spin():
         nonlocal balance, current_reels
 
-        try:
-            bet = int(bet_input.value)
-        except (ValueError, TypeError): 
-            result_label.text = "Please enter a valid number."
+        bet = validate_bet()
+        if bet is None:
             update_spin_button_state()
             return
 
-        # Extra validation for bet amount
-        if bet <= 0:
-            result_label.text = "Bet must be greater than 0!"
-            update_spin_button_state()
-            return
-
-        if bet > balance:
-            result_label.text = "Insufficient balance!"
-            update_spin_button_state()
-            return
+        # Clear old win/loss message when starting a new spin
+        result_label.text = ""
 
         # Deduct bet and lock controls during spin
         spin_button.disable()
@@ -122,15 +114,18 @@ def slots_page():
         for i in range(20):  # Number of animation frames
             if i < 10:
                 reel_1.text = random.choice(SYMBOLS)
-            else:
+            elif i == 10:
                 reel_1.text = final_reels[0]
 
             if i < 15:
                 reel_2.text = random.choice(SYMBOLS)
-            else:
+            elif i == 15:
                 reel_2.text = final_reels[1]
 
-            reel_3.text = random.choice(SYMBOLS) if i < 18 else final_reels[2]
+            if i < 18:
+                reel_3.text = random.choice(SYMBOLS) 
+            elif i == 18: 
+                reel_3.text = final_reels[2]
 
             await asyncio.sleep(0.08)  # Delay for animation effect
 
@@ -149,6 +144,8 @@ def slots_page():
                 multiplier = SYMBOL_VALUE[current_reels[0]]
                 result_label.text = f"Jackpot! You won ${payout}!"
                 result_label.classes(replace="text-2xl font-bold text-green-500")
+                
+                ui.notify(f"JACKPOT! +${payout}", type="positive", icon="star", position="top")
             else:
                 result_label.text = f"Two of a kind! You won ${payout}!"
                 result_label.classes(replace="text-2xl font-bold text-yellow-500")
@@ -166,13 +163,9 @@ def slots_page():
         balance_label.text = f"Balance: ${balance}"
 
         # Clear and reenable input
-        bet_input.set_value(0) 
+        bet_input.set_value(None) 
         spin_button.enable()
         bet_input.enable()
-
-        # Refresh button state for next turn
-        update_spin_button_state() 
-        
         
     # --- page layout ---
     ui.query(".nicegui-content").classes("p-0")
@@ -182,15 +175,15 @@ def slots_page():
     ):
 
         # Payout table sidepanel
-        with ui.card().classes(f"fixed top-6 left-6 bg-{ACCENT_LIGHT} shadow-lg border roundex-xl w-60 z-10 gap-l"):
-            ui.label("Payout Table").classes("text-2xl font-bold text-gray-800 border-b pb-l w-full")
+        with ui.card().classes(f"fixed top-6 left-6 bg-white shadow-lg border rounded-xl w-60 z-10 gap-1"):
+            ui.label("Payout Table").classes("text-2xl font-bold text-gray-800 border-b pb-1 w-full")
 
             for symbol, value in SYMBOL_VALUE.items():
                 with ui.row().classes("justify-between w-full text-xs text-gray-700 py-0.5"):
                     ui.label(f"3x {symbol}")
                     ui.label(f"{value}x").classes("font-bold text-green-600")
 
-            ui.separator().classes("my-l")
+            ui.separator().classes("my-1")
 
             with ui.row().classes("justify-between w-full text-xs text-gray-700 py-0.5"):
                 ui.label("2x any symbol")
